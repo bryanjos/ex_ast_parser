@@ -20,6 +20,7 @@ class Tuple {
 }
 
 function getType(obj){
+
   if (_list_Q(obj)) {   return 'list'; }
   else if (_tuple_Q(obj)) { return 'tuple'; }
   else if (_nil_Q(obj)) {      return 'nil'; }
@@ -38,7 +39,7 @@ function getType(obj){
 
 
 function _equal_Q (a, b) {
-    var ota = _obj_type(a), otb = _obj_type(b);
+    var ota = getType(a), otb = getType(b);
     if (ota !== otb) {
         return false;
     }
@@ -60,6 +61,7 @@ function _true_Q(a) { return a === true ? true : false; }
 function _false_Q(a) { return a === false ? true : false; }
 function _function_Q(obj) { return typeof obj == "function"; }
 function _list_Q(obj) { return Array.isArray(obj); }
+function _tuple_Q(obj) { return obj instanceof Tuple; }
 
 export {
   Tuple,
@@ -68,5 +70,6 @@ export {
   _true_Q,
   _false_Q,
   _function_Q,
-  _list_Q
+  _list_Q,
+  _tuple_Q
 }

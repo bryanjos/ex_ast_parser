@@ -1,4 +1,4 @@
-import types from './types';
+import * as types from './types';
 
 function println(...args) {
   console.log.apply(console, args);
@@ -8,14 +8,14 @@ function println(...args) {
 function _pr_str(obj, print_readably) {
     if (typeof print_readably === 'undefined') { print_readably = true; }
     var _r = print_readably;
-    var ot = types._obj_type(obj);
+    var ot = types.getType(obj);
     switch (ot) {
     case 'list':
         var ret = obj.map(function(e) { return _pr_str(e,_r); });
-        return "[" + ret.join(' ') + "]";
+        return "[" + ret.join(', ') + "]";
     case 'tuple':
         var ret = obj.items.map(function(e) { return _pr_str(e,_r); });
-        return "{" + ret.join(' ') + "}";
+        return "{" + ret.join(', ') + "}";
     case 'string':
         if (_r) {
             return '"' + obj.replace(/\\/g, "\\\\")

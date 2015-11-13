@@ -11,7 +11,7 @@ Reader.prototype.next = function() { return this.tokens[this.position++]; }
 Reader.prototype.peek = function() { return this.tokens[this.position]; }
 
 function tokenize(str) {
-    let re = /[\s,]*(~@|[\[\]{}()'`~^@]|"(?:\\.|[^\\"])*"|;.*|[^\s\[\]{}('"`,;)]*)/g;
+    let re = /[\s,]*(:{}|:%{}|:<<>>|:%|[\[\]{}()'`~^@]|"(?:\\.|[^\\"])*"|;.*|[^\s\[\]{}('"`,;)]*)/g;
     let results = [];
     let match;
 
