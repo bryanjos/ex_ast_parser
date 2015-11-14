@@ -56,12 +56,24 @@ function _equal_Q (a, b) {
     }
 }
 
+function _malfunc(f, ast, env, params) {
+    f.ast = ast
+    f.env = env
+    f.params = params
+    f.meta = null
+    f.ismacro = false
+    return f
+}
+
+const _malfunc_Q = f => f.ast ? true : false;
+
 function _nil_Q(a) { return a === null ? true : false; }
 function _true_Q(a) { return a === true ? true : false; }
 function _false_Q(a) { return a === false ? true : false; }
 function _function_Q(obj) { return typeof obj == "function"; }
 function _list_Q(obj) { return Array.isArray(obj); }
 function _tuple_Q(obj) { return obj instanceof Tuple; }
+function _atom_Q(obj) { return typeof obj == "symbol"; }
 
 export {
   Tuple,
@@ -71,5 +83,8 @@ export {
   _false_Q,
   _function_Q,
   _list_Q,
-  _tuple_Q
+  _tuple_Q,
+  _atom_Q,
+  _malfunc,
+  _malfunc_Q
 }

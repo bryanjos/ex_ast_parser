@@ -1,4 +1,4 @@
-export function new_env(outer={}, binds=[], exprs=[]) {
+export function new_env(outer = {}, binds=[], exprs=[]) {
     let e = Object.setPrototypeOf({}, outer);
 
     // Bind symbols in binds to values in exprs
