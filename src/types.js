@@ -26,15 +26,14 @@ function getType(obj){
   else if (_nil_Q(obj)) {      return 'nil'; }
   else if (_true_Q(obj)) {     return 'true'; }
   else if (_false_Q(obj)) {    return 'false'; }
-  else {
-      switch (typeof(obj)) {
-        case 'symbol':   return 'atom';
-        case 'number':   return Number.isInteger(obj) ? 'integer' : 'float';
-        case 'function': return 'function';
-        case 'string': return 'string';
-        default: throw new Error("Unknown type '" + typeof(obj) + "'");
-      }
-  }
+  else if (_atom_Q(obj)) {    return 'atom'; }
+  else if (_integer_Q(obj)) {    return 'integer'; }
+  else if (_float_Q(obj)) {    return 'float'; }
+  else if (_function_Q(obj)) {    return 'function'; }
+  else if (_string_Q(obj)) {    return 'string'; }
+  else if (_map_Q(obj)) {    return 'map'; }
+
+  throw new Error("Unknown type '" + typeof(obj) + "'");
 }
 
 
@@ -56,24 +55,19 @@ function _equal_Q (a, b) {
     }
 }
 
-function _malfunc(f, ast, env, params) {
-    f.ast = ast
-    f.env = env
-    f.params = params
-    f.meta = null
-    f.ismacro = false
-    return f
-}
-
-const _malfunc_Q = f => f.ast ? true : false;
-
 function _nil_Q(a) { return a === null ? true : false; }
 function _true_Q(a) { return a === true ? true : false; }
 function _false_Q(a) { return a === false ? true : false; }
+
+function _boolean_Q(obj) { return typeof obj == "boolean"; }
 function _function_Q(obj) { return typeof obj == "function"; }
 function _list_Q(obj) { return Array.isArray(obj); }
 function _tuple_Q(obj) { return obj instanceof Tuple; }
 function _atom_Q(obj) { return typeof obj == "symbol"; }
+function _string_Q(obj) { return typeof obj == "string"; }
+function _integer_Q(obj) { return Number.isInteger(obj); }
+function _float_Q(obj) { return typeof obj == "number" && !Number.isInteger(obj); }
+function _map_Q(obj) { return typeof obj == "object" }
 
 export {
   Tuple,
@@ -85,6 +79,9 @@ export {
   _list_Q,
   _tuple_Q,
   _atom_Q,
-  _malfunc,
-  _malfunc_Q
+  _boolean_Q,
+  _string_Q,
+  _integer_Q,
+  _float_Q,
+  _map_Q
 }

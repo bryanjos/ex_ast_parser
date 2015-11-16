@@ -31,9 +31,25 @@ export function call(callee, args) {
   }
 }
 
+export function _new(callee, args) {
+  return {
+    type: "NewExpression",
+    callee: callee,
+    arguments: arguments
+  }
+}
+
 export function array(elements) {
   return {
     type: "ArrayExpression",
     elements: elements
   }
+}
+
+export function tuple(elements) {
+  return _new(identifier("Tuple"), elements);
+}
+
+export function symbol(description) {
+  return _call(identifier("Symbol"), [description]);
 }
