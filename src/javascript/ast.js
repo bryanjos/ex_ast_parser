@@ -23,11 +23,20 @@ export function identifier(name) {
   }
 }
 
-export function call(callee, args) {
+export function binary(operator, left, right) {
+  return {
+    type: "BinaryExpression",
+    operator: operator,
+    left: left,
+    right: right
+  }
+}
+
+export function _call(callee, args) {
   return {
     type: "CallExpression",
     callee: callee,
-    arguments: arguments
+    arguments: args
   }
 }
 
@@ -35,7 +44,7 @@ export function _new(callee, args) {
   return {
     type: "NewExpression",
     callee: callee,
-    arguments: arguments
+    arguments: args
   }
 }
 
@@ -52,4 +61,20 @@ export function tuple(elements) {
 
 export function symbol(description) {
   return _call(identifier("Symbol"), [description]);
+}
+
+export function member(object, property, computed = false) {
+  return {
+    type: "MemberExpression",
+    object: object,
+    property: property,
+    computed: computed
+  }
+}
+
+export function block(statements) {
+  return {
+    type: "BlockStatement",
+    body: statements
+  }
 }
