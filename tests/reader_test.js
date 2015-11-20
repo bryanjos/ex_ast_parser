@@ -14,9 +14,9 @@ describe('reader', function() {
   });
 
   it('read symbols', function() {
-    expect(reader.read_str(':yolo')).to.equal(Symbol.for("yolo"));
+    expect(reader.read_str(':hello')).to.equal(Symbol.for("hello"));
     expect(reader.read_str(':^')).to.equal(Symbol.for("^"));
-    expect(reader.read_str('Hello.Ghost')).to.equal(Symbol.for("Hello.Ghost"));
+    expect(reader.read_str('Hello.World')).to.equal(Symbol.for("Hello.World"));
   });
 
   it('read nil', function() {
