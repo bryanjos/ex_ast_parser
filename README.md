@@ -1,12 +1,11 @@
-# Compile
+Elixir AST Parser
+=================
 
-* Elixir
-  * Elixir Code into Elixir AST
-  * Save Elixir AST into temp directory
-  * Call ExASTParser process
+An experiment to create an Elixir AST parser in JavaScript. This project is modified from the [MAL project](https://github.com/kanaka/mal)
 
-* Node
-  * Parse ExAST
-  * Expand Macros
-  * Translate to JavaScript AST
-  * Convert to JavaScript code
+## Usage
+
+* npm install
+* npm run repl
+
+In the repl, use `:q` to quit
